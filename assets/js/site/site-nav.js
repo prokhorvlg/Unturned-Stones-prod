@@ -185,7 +185,7 @@ function openNav() {
     console.log('mobileNavOpen');
     navContainer.style.left = "0";
     navContainer.style.minWidth = "100%";
-    navContainer.style.height = "100%";
+    navContainer.style.height = "100vh";
     navContainer.style.bottom = "0";
     menuBarContainer.style.borderRight = "none";
     menuBarContainer.style.borderBottom = "1px solid rgba(255,255,255,0.3)";
