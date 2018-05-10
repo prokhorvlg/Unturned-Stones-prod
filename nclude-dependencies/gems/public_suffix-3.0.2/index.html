@@ -1,0 +1,356 @@
+<!doctype>
+<html lang="en">
+  <head>
+    <!--     Custom Styles     -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="In the distant future, during one of many nameless interstellar conflicts, a technology was perfected that could replace a persons morality, ethics, and empathy - named the prosthetic soul.">
+    <meta name="author" content="prokhorVLG">
+    <meta name="revisit-after" content="5 days">
+
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+
+    <title>Unturned Stones</title>
+
+    <!--     jQuery     -->
+    <!--     The jQuery library.     -->
+    <script src="/assets/js/jQuery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/jQuery/jquery-ui.min.css">
+    <link rel="stylesheet" href="/assets/css/jQuery/jquery-ui.theme.min.css">
+    <script src="/assets/js/jQuery/jquery-ui.min.js"></script>
+
+    <!--     jQuery: Shuffle Letters     -->
+    <!--    The plugin that shuffles letters on certain text elements.     -->
+    <script src="/assets/js/jQuery-plugins/jquery.shuffleLetters.js"></script>
+
+    <!--     jQuery: Terminal     -->
+    <!--    The plugin that operates the terminal component.     -->
+    <script src="/assets/js/jQuery-terminal/jquery.terminal.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/jQuery-terminal/jquery.terminal.css">
+
+    <!--     Animate on Scroll library     -->
+    <!--     The library that animates elements when you scroll to/away from them.     -->
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+    
+
+    <!--     Bootstrap Core     -->
+    <!--     For setting up page layouts.     -->
+    <link href="/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="/assets/js/bootstrap/bootstrap.min.js"></script>
+
+    <!--     Web Fonts     -->
+    <!--     Adds the site fonts.     -->
+    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    <!--     Custom Styles     -->
+    <!--     Adds my site styles.     -->
+    <link href="/assets/css/main-style.css" rel="stylesheet">
+
+    <!--     Normalize     -->
+    <!--     Adds cross-browser consistency and fixes some bugs.     -->
+    <link href="/assets/css/normalize/normalize.css" rel="stylesheet">
+
+    <!--     Custom Scripts     -->
+    <script src="/assets/js/site/site-parallax.js"></script>
+    <script src="/assets/js/site/site-shufflequote.js"></script>
+    <script src="/assets/js/site/site-nav.js"></script>
+    <script src="/assets/js/site/site-terminal.js"></script>
+    
+  </head>
+  <body>
+
+    <div id="siteContainer" class="siteContainer color-bg-2-l color-primary-l">
+      
+      <!--     Contains the site, which is pushed when the nav is opened.     -->
+      <div id="contentContainer" class="contentContainer">
+
+        <!--     Includes the header at the top of the site.     -->
+        This is the header.
+
+        <!--     Contains whatever content is templated into the page.     -->
+        <h1 id="public-suffix-for-ruby">Public Suffix <small>for Ruby</small></h1>
+
+<p><tt>PublicSuffix</tt> is a Ruby domain name parser based on the <a href="https://publicsuffix.org/">Public Suffix List</a>.</p>
+
+<p><a href="https://travis-ci.org/weppos/publicsuffix-ruby"><img src="https://travis-ci.org/weppos/publicsuffix-ruby.svg?branch=master" alt="Build Status" /></a></p>
+
+<h2 id="requirements">Requirements</h2>
+
+<ul>
+  <li>Ruby &gt;= 2.1</li>
+</ul>
+
+<p>For an older versions of Ruby use a previous release.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>You can install the gem manually:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gem install public_suffix
+</code></pre></div></div>
+
+<p>Or use Bundler and define it as a dependency in your <code class="highlighter-rouge">Gemfile</code>:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s1">'public_suffix'</span>
+</code></pre></div></div>
+
+<p>If you are upgrading to 2.0, see <a href="/Unturned-Stones-2/nclude-dependencies/gems/public_suffix-3.0.2/2.0-Upgrade/">2.0-Upgrade.md</a>.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>Extract the domain out from a name:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">domain</span><span class="p">(</span><span class="s2">"google.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; "google.com"</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">domain</span><span class="p">(</span><span class="s2">"www.google.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; "google.com"</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">domain</span><span class="p">(</span><span class="s2">"www.google.co.uk"</span><span class="p">)</span>
+<span class="c1"># =&gt; "google.co.uk"</span>
+</code></pre></div></div>
+
+<p>Parse a domain without subdomains:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">domain</span> <span class="o">=</span> <span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"google.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;PublicSuffix::Domain&gt;</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">tld</span>
+<span class="c1"># =&gt; "com"</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">sld</span>
+<span class="c1"># =&gt; "google"</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">trd</span>
+<span class="c1"># =&gt; nil</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">domain</span>
+<span class="c1"># =&gt; "google.com"</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">subdomain</span>
+<span class="c1"># =&gt; nil</span>
+</code></pre></div></div>
+
+<p>Parse a domain with subdomains:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">domain</span> <span class="o">=</span> <span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"www.google.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;PublicSuffix::Domain&gt;</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">tld</span>
+<span class="c1"># =&gt; "com"</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">sld</span>
+<span class="c1"># =&gt; "google"</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">trd</span>
+<span class="c1"># =&gt; "www"</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">domain</span>
+<span class="c1"># =&gt; "google.com"</span>
+<span class="n">domain</span><span class="p">.</span><span class="nf">subdomain</span>
+<span class="c1"># =&gt; "www.google.com"</span>
+</code></pre></div></div>
+
+<p>Simple validation example:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">valid?</span><span class="p">(</span><span class="s2">"google.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; true</span>
+
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">valid?</span><span class="p">(</span><span class="s2">"www.google.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; true</span>
+
+<span class="c1"># Explicitly forbidden, it is listed as a private domain</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">valid?</span><span class="p">(</span><span class="s2">"blogspot.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; false</span>
+
+<span class="c1"># Unknown/not-listed TLD domains are valid by default</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">valid?</span><span class="p">(</span><span class="s2">"example.tldnotlisted"</span><span class="p">)</span>
+<span class="c1"># =&gt; true</span>
+</code></pre></div></div>
+
+<p>Strict validation (without applying the default * rule):</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">valid?</span><span class="p">(</span><span class="s2">"example.tldnotlisted"</span><span class="p">,</span> <span class="ss">default_rule: </span><span class="kp">nil</span><span class="p">)</span>
+<span class="c1"># =&gt; false</span>
+</code></pre></div></div>
+
+<h2 id="fully-qualified-domain-names">Fully Qualified Domain Names</h2>
+
+<p>This library automatically recognizes Fully Qualified Domain Names. A FQDN is a domain name that end with a trailing dot.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Parse a standard domain name</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">domain</span><span class="p">(</span><span class="s2">"www.google.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; "google.com"</span>
+
+<span class="c1"># Parse a fully qualified domain name</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">domain</span><span class="p">(</span><span class="s2">"www.google.com."</span><span class="p">)</span>
+<span class="c1"># =&gt; "google.com"</span>
+</code></pre></div></div>
+
+<h2 id="private-domains">Private domains</h2>
+
+<p>This library has support for switching off support for private (non-ICANN).</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Extract a domain including private domains (by default)</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">domain</span><span class="p">(</span><span class="s2">"something.blogspot.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; "something.blogspot.com"</span>
+
+<span class="c1"># Extract a domain excluding private domains</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">domain</span><span class="p">(</span><span class="s2">"something.blogspot.com"</span><span class="p">,</span> <span class="ss">ignore_private: </span><span class="kp">true</span><span class="p">)</span>
+<span class="c1"># =&gt; "blogspot.com"</span>
+
+<span class="c1"># It also works for #parse and #valid?</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"something.blogspot.com"</span><span class="p">,</span> <span class="ss">ignore_private: </span><span class="kp">true</span><span class="p">)</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">valid?</span><span class="p">(</span><span class="s2">"something.blogspot.com"</span><span class="p">,</span> <span class="ss">ignore_private: </span><span class="kp">true</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>If you don’t care about private domains at all, it’s more efficient to exclude them when the list is parsed:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Disable support for private TLDs</span>
+<span class="no">PublicSuffix</span><span class="o">::</span><span class="no">List</span><span class="p">.</span><span class="nf">default</span> <span class="o">=</span> <span class="no">PublicSuffix</span><span class="o">::</span><span class="no">List</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="no">PublicSuffix</span><span class="o">::</span><span class="no">List</span><span class="o">::</span><span class="no">DEFAULT_LIST_PATH</span><span class="p">),</span> <span class="ss">private_domains: </span><span class="kp">false</span><span class="p">)</span>
+<span class="c1"># =&gt; "blogspot.com"</span>
+<span class="no">PublicSuffix</span><span class="p">.</span><span class="nf">domain</span><span class="p">(</span><span class="s2">"something.blogspot.com"</span><span class="p">)</span>
+<span class="c1"># =&gt; "blogspot.com"</span>
+</code></pre></div></div>
+
+<h2 id="what-is-the-public-suffix-list">What is the Public Suffix List?</h2>
+
+<p>The <a href="https://publicsuffix.org">Public Suffix List</a> is a cross-vendor initiative to provide an accurate list of domain name suffixes.</p>
+
+<p>The Public Suffix List is an initiative of the Mozilla Project, but is maintained as a community resource. It is available for use in any software, but was originally created to meet the needs of browser manufacturers.</p>
+
+<p>A “public suffix” is one under which Internet users can directly register names. Some examples of public suffixes are “.com”, “.co.uk” and “pvt.k12.wy.us”. The Public Suffix List is a list of all known public suffixes.</p>
+
+<h2 id="why-the-public-suffix-list-is-better-than-any-available-regular-expression-parser">Why the Public Suffix List is better than any available Regular Expression parser?</h2>
+
+<p>Previously, browsers used an algorithm which basically only denied setting wide-ranging cookies for top-level domains with no dots (e.g. com or org). However, this did not work for top-level domains where only third-level registrations are allowed (e.g. co.uk). In these cases, websites could set a cookie for co.uk which will be passed onto every website registered under co.uk.</p>
+
+<p>Clearly, this was a security risk as it allowed websites other than the one setting the cookie to read it, and therefore potentially extract sensitive information.</p>
+
+<p>Since there is no algorithmic method of finding the highest level at which a domain may be registered for a particular top-level domain (the policies differ with each registry), the only method is to create a list of all top-level domains and the level at which domains can be registered. This is the aim of the effective TLD list.</p>
+
+<p>As well as being used to prevent cookies from being set where they shouldn’t be, the list can also potentially be used for other applications where the registry controlled and privately controlled parts of a domain name need to be known, for example when grouping by top-level domains.</p>
+
+<p>Source: https://wiki.mozilla.org/Public_Suffix_List</p>
+
+<p>Not convinced yet? Check out <a href="https://stackoverflow.com/q/288810/123527">this real world example</a>.</p>
+
+<h2 id="does-publicsuffix-make-requests-to-public-suffix-list-website">Does <tt>PublicSuffix</tt> make requests to Public Suffix List website?</h2>
+
+<p>No. <tt>PublicSuffix</tt> comes with a bundled list. It does not make any HTTP requests to parse or validate a domain.</p>
+
+<h2 id="feedback-and-bug-reports">Feedback and bug reports</h2>
+
+<p>If you use this library and find yourself missing any functionality, please <a href="mailto:weppos@weppos.net">let me know</a>.</p>
+
+<p>Pull requests are very welcome! Please include tests and/or feature coverage for every patch, and create a topic branch for every separate change you make.</p>
+
+<p>Report issues or feature requests to <a href="https://github.com/weppos/publicsuffix-ruby/issues">GitHub Issues</a>.</p>
+
+<h2 id="more">More</h2>
+
+<ul>
+  <li><a href="https://simonecarletti.com/code/publicsuffix-ruby">Homepage</a></li>
+  <li><a href="https://github.com/weppos/publicsuffix-ruby">Repository</a></li>
+  <li><a href="http://rubydoc.info/gems/public_suffix">API Documentation</a></li>
+  <li><a href="https://simonecarletti.com/blog/2010/06/public-suffix-list-library-for-ruby/">Introducing the Public Suffix List library for Ruby</a></li>
+</ul>
+
+<h2 id="changelog">Changelog</h2>
+
+<p>See the <a href="/Unturned-Stones-2/nclude-dependencies/gems/public_suffix-3.0.2/CHANGELOG/">CHANGELOG.md</a> file for details.</p>
+
+<h2 id="license">License</h2>
+
+<p>Copyright (c) 2009-2018 Simone Carletti. This is Free Software distributed under the MIT license.</p>
+
+<p>The <a href="https://publicsuffix.org/list/">Public Suffix List source</a> is subject to the terms of the Mozilla Public License, v. 2.0.</p>
+
+
+        <!--     Includes the footer at the end of the site.     -->
+        Footer.
+
+      </div>
+      <div id="dimDiv" class="dimDiv" onclick="outsideClick()"></div>
+      <div id="navContainer" class="navContainer color-primary">
+
+        <!--     Includes the navigation menu on the side of the site.     -->
+        <!-- Upper Nav Section -->
+<div class="navChild center navTitleContainer">
+
+  <!-- Nav Title Section -->
+  <div class="navTitleSection">
+    <h1 class="navTitle">UNTURNED <strong>STONES</strong></h1>
+    <p class="navDesc font-code nav_color">Morality at the flick of a switch</p>
+  </div>
+
+  <!-- Nav Tabs -->
+  <div class="navTabs">
+    <div class="navTab">
+      <div class="navTabCircle nav_home" id="nav_home" onclick="navClick('home')"><img src='/assets/images/nav/nav_home.png' class="navTabImage" /></div>
+    </div>
+    <div class="navTab">
+      <div class="navTabCircle nav_chronicle" id="nav_chronicle" onclick="navClick('chronicle')"><img src='/assets/images/nav/nav_chronicle_color.png' class="navTabImage" /></div>
+    </div>
+    <div class="navTab">
+      <div class="navTabCircle nav_codex" id="nav_codex" onclick="navClick('codex')"><img src='/assets/images/nav/nav_codex_color.png' class="navTabImage" /></div>
+    </div>
+    <div class="navTab">
+      <div class="navTabCircle nav_terminal" id="nav_terminal" onclick="navClick('terminal')"><img src='/assets/images/nav/nav_terminal_color.png' class="navTabImage" /></div>
+    </div>
+    <div class="navTab">
+      <div class="navTabCircle nav_about" id="nav_about" onclick="navClick('about')"><img src='/assets/images/nav/nav_about.png' class="navTabImage" /></div>
+    </div>
+  </div>
+
+  <!-- Nav Seperator Bar Line -->
+  <div class="navSectionBarContainer">
+    <div class="navSectionBarLine nav_color_bg"></div>
+    <div class="navSectionBarText nav_color" id="nav_sectionTitle">HOME</div>
+    <div class="navSectionBarLine nav_color_bg"></div>
+  </div>
+
+  <!-- Nav Description -->
+  <div class="navSectionDescriptionContainer">
+    <p id="nav_sectionDescription">Description here.</p>
+  </div>
+
+  <!--<div class="navBackButton" id="navBackButton">
+    <p class="font-code nav_color"><< BACK</p>
+  </div>-->
+
+</div>
+
+<!-- Nav Main Section -->
+<div class="navChild navScrollable utsScrollBar" id="navScrollable">
+  No navigation items!
+</div>
+
+<!-- Nav Terminal Section -->
+<div class="navChild navTerminal" id='navTerminal'>
+  <div class="utsTerminal navTerminalChild utsScrollBar">
+    
+  </div>
+</div>
+
+      </div>
+      <div id="menuBarContainer" class="menuBarContainer color-primary" onclick="manipNav()" onmouseleave="resetSpin()">
+
+        
+        <div class="menuBarFlex">
+          <div class="menuBarChild menuBarLogo" id='menuBarLogo'>
+            <!--<img src="/assets/images/spinning_logo/d1.png" class="menuBarLogoImage" />-->
+          </div>
+          <div class="menuBarChildMenu">
+            <svg class="menuBarArrow menuBarArrowRight" x="0px" y="0px" viewBox="0 0 6.4 10" xml:space="preserve" _v-978818ec=""> <polygon fill="#fff" points="3.6,5 0,1.4 1.4,0 5,3.6 6.4,5 5,6.4 1.4,10 0,8.6 " _v-978818ec=""></polygon></svg>
+
+            <p class="font-code" id="menuBarLabel">Menu</p>
+
+            <svg class="menuBarArrow menuBarArrowLeft" x="0px" y="0px" viewBox="0 0 6.4 10" xml:space="preserve" _v-978818ec=""> <polygon fill="#fff" points="3.6,5 0,1.4 1.4,0 5,3.6 6.4,5 5,6.4 1.4,10 0,8.6 " _v-978818ec=""></polygon></svg>
+          </div>
+          <div class="menuBarChildText">
+            <p class="font-code">Contemporary Cyberpunk<span class="blinkingScore">_</span></p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class='preloadImages'></div>
+
+  </body>
+</html>
