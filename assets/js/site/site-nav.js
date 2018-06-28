@@ -214,9 +214,12 @@ function loadMenuBarLogo() {
 
 // Scrolls to target element within the body container.
 function scrollToElement(targetEl) {
-  $('body').animate({ 
+  /* $('body').animate({ 
     scrollTop: $('#' + targetEl).offset().top - $('body').offset().top + $('body').scrollTop()
-  });
+  }); */
+  $('html, body').animate({
+    scrollTop: $('#' + targetEl).offset().top
+  }, 300);
 }
 
 // Processes a URL for use in the breadcrumb display.

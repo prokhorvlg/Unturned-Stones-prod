@@ -324,6 +324,9 @@ body {
 @media (max-width: 991px) {
   .navTitle {
     font-size: 1.5em;
+    margin: 0;
+    text-align: center;
+    padding-left: 0;
   }
   .navDesc {
     font-size: 9px;
@@ -455,6 +458,14 @@ body {
   height: 60px;
   text-align: left;
 }
+@media (max-width: 991px) {
+  .navSectionDescriptionContainer {
+    height: auto;
+  }
+  .navSectionDescriptionContainer p {
+    font-size: 14px;
+  }
+}
 .navBackButton {
   padding: 10px;
   margin-bottom: 20px;
@@ -470,6 +481,13 @@ body {
   border-left: 2px solid rgba(255,255,255,0.4);
   border-right: 2px solid rgba(255,255,255,0.4);
 
+}
+@media (max-width: 991px) {
+  .navBackButton {
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 .navBackButton:hover {
   background-color: rgba(255,255,255,0.2);
@@ -488,6 +506,13 @@ body {
   transition: 0.2s ease-in-out;
   flex-grow: 1;
   /* margin-top: 30px; */
+}
+@media (max-width: 991px) {
+  .navScrollable {
+    padding-top: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 
 .navHeadingItem {
@@ -509,6 +534,10 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+@media (max-width: 991px) {
+  .navHeadingItem {
+  }
+}
 .navHeadingItem:hover {
   background-color: rgba(255,255,255,0.2);
   border-left: 2px solid white;
@@ -520,6 +549,11 @@ body {
   text-transform: uppercase; */
   font-size: 18px;
   letter-spacing: 0em;
+}
+@media (max-width: 991px) {
+  .navHeadingItemTitle {
+    padding-left: 20px;
+  }
 }
 .navHeadingItemDescription {
   padding-left: 20px;
@@ -534,6 +568,12 @@ body {
   text-align: right;
   padding-right: 20px;
 }
+@media (max-width: 991px) {
+  .navHeadingItemDescription {
+    display: none;
+  }
+}
+
 .navHeadingItemIcon {
   font-size: 26px;
   line-height: 0.9em;
@@ -557,6 +597,11 @@ body {
 
   text-align: justify;
   margin-right: 15px;
+}
+@media (max-width: 991px) {
+  .navHeadingDetails {
+    display: none;
+  }
 }
 
 .navHeadingContainer {
@@ -1186,6 +1231,9 @@ body {
     padding: 40px;
     border-top: 1px solid rgba(255,255,255,0.2);
     margin-right: 0;
+  }
+  .codexImage img {
+    width: 100%;
   }
 }
 
