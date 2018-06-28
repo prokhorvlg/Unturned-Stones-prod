@@ -7,8 +7,8 @@ var navIsOpen = false;
 
 // Stores data regarding the nav tabs in the sidebar.
 var navSections = { 
-  "home": {
-    "description": "Go home.",
+  "hub": {
+    "description": "A quick access point for major links.",
     "color": "#fff"
   },
   "chronicle": {
@@ -35,7 +35,7 @@ var headings = {
   "geography": {
     "title": "Geography",
     "description": "", 
-    "details": "Five suns. Three brown dwarfs. Dozens of rogues. All orbiting a massive black hole meandering through space. Find out more through the interactive cartouche, a map of the known universe.",
+    "details": "Five suns. Three brown dwarfs. Dozens of rogues. All orbiting a massive black hole meandering through space.<br><br>Find out more through the interactive cartouche, a map of the known universe.",
     "actions": "expand",
     "icon": "═",
     "link": "",
@@ -80,6 +80,7 @@ var headings = {
   },
   "technology": {
     "title": "Technology",
+    "details": "Ubiquitous cybertechnology and superluminal starships reign in a society dominated by artificial intelligence in every aspect, where man operates in union with the machine but in turn has arguably lost free will. <br><br>Meanwhile, mechatronics and energy technology wane in a world where those concepts haven't even been considered as viable; where an advanced understanding of human psychology and the prevalence of centralized fusion have rendered those ideas virtually useless to study.",
     "description": "", 
     "actions": "expand",
     "icon": "═",
@@ -100,14 +101,19 @@ var headings = {
   "spacecraft": {
     "title": "Spacecraft",
     "description": "Interstellar Torchships", 
+    "details": "Ranging from rock-hopping pods to mile-high monoliths, centuries of interstellar travel has perfected the 'starscraper' design. The best way to describe the common starship is an air-sealed high-rise building with a fusion drive strapped to the bottom, hurtling through space at 1g of acceleration.<br><br>Starscrapers have changed greatly over the course of time, but one thing has always remained certain - they are the tool of choice for anyone with any influence, and there is little reason to believe that will ever change.",
     "actions": "expand",
     "icon": "═",
     "link": "/technology/spacecraft",
     "subheadings": [
       "starscrapers",
+      "boring-rocket",
+      "loxley",
       "metavaski-minke",
-      "boring-rocket"
-    ]
+      "nedry",
+      "petra-wayward",
+      "shenlong",
+    ],
   },
   "starscrapers": {
     "title": "Starscrapers",
@@ -118,41 +124,141 @@ var headings = {
     "subheadings": []
   },
   "metavaski-minke": {
-    "title": "The Metavaski Minke",
+    "title": "Metavaski Minke",
     "description": "Data Hauler", 
     "actions": "direct",
     "icon": ">",
-    "link": "/technology/spacecraft/metavaski-minke",
+    "link": "/codex/technology/spacecraft/metavaski-minke",
     "subheadings": []
   },
   "boring-rocket": {
-    "title": "The Boring Rocket",
+    "title": "Boring Rocket",
     "description": "Mining vessel", 
     "actions": "direct",
     "icon": ">",
-    "link": "/technology/spacecraft/boring-rocket",
+    "link": "/codex/technology/spacecraft/boring-rocket",
     "subheadings": []
-  }
+  },
+  "nedry": {
+    "title": "BOS Nedry",
+    "description": "Warships without guns", 
+    "actions": "direct",
+    "icon": ">",
+    "link": "/codex/technology/spacecraft/nedry",
+    "subheadings": []
+  },
+  "loxley": {
+    "title": "Lord of Loxley",
+    "description": "Merry men", 
+    "actions": "direct",
+    "icon": ">",
+    "link": "/codex/technology/spacecraft/loxley",
+    "subheadings": []
+  },
+  "shenlong": {
+    "title": "COEK Shenlong",
+    "description": "Emperor's Spirit Dragon", 
+    "actions": "direct",
+    "icon": ">",
+    "link": "/codex/technology/spacecraft/shenlong",
+    "subheadings": []
+  },
+  "petra-wayward": {
+    "title": "Petra-Wayward Startower",
+    "description": "Center of Commerce", 
+    "actions": "direct",
+    "icon": ">",
+    "link": "/codex/technology/spacecraft/petra-wayward",
+    "subheadings": []
+  },
 }
 
 // The HTML generated from the above object is stored here.
-var generatedNav = {};
+var generatedNavButtons = {};
+var generatedNavPages = {};
+
+var activeSection = 'hub';
+
+var pageType = '';
 
 $(document).ready(function(){
+  pageType = $('body').attr('class');
   generateNav();
-  navClick('home');
+  navClick('hub');
+
+  $('.navTitleSection').click(function() {
+    window.location.href = '/';
+  });
+
+  if ($("#processURL").length){
+    var urlString = $("#processURL").html();
+    var pageColor = $("#processURL").css('color');
+    $("#processURL").html(processURL(urlString, pageColor, pageType));
+  }
+
+  // Temporary fix for spinning dorito logo.
+  loadMenuBarLogo();
 });
 
-function generateNav() {
-  generatedNav = { 
-    'home': findNavItems('home'),
-    'chronicle': findNavItems('chronicle'),
-    'codex': findNavItems('codex'),
-    'terminal': findNavItems('terminal'),
-    'about': findNavItems('about')
-  };
+function loadMenuBarLogo() {
+  $('.menuBarLogo').css('opacity', '0');
+  $('.menuBarLogo').css('animation-play-state', 'running');
+  setTimeout(function() {
+    $('.menuBarLogo').css('transition', '0.3s ease-in-out');
+  }, 5);
+  setTimeout(function() {
+    resetSpin();
+    $('.menuBarLogo').css('opacity', '1');
+  }, 1000);
 }
 
+// Scrolls to target element within the body container.
+function scrollToElement(targetEl) {
+  $('#contentContainer').animate({ 
+    scrollTop: $('#' + targetEl).offset().top - $('#contentContainer').offset().top + $('#contentContainer').scrollTop()
+  });
+}
+
+// Processes a URL for use in the breadcrumb display.
+function processURL(urlString, color, section) {
+  var urlArray = urlString.split('/');
+  var final = '';
+
+  for (var i = 0; i < urlArray.length; i++) {
+    if (urlArray[i] != ''){
+      if (headings[urlArray[i]]) {
+        if (headings[urlArray[i]].actions != 'direct') {
+          final = final + "<span class='breadcrumbDivider font-code'> : </span>";
+          final = final + "<a href='javascript:void(0)' onclick='navigateSidenav(\"" + urlArray[i] + "\", \"" + section + "\")' class='breadcrumbElement font-code' style='color:" + color + ";'>" + urlArray[i] + "</a>";
+        }
+        else {
+          final = final + "<span class='breadcrumbDivider font-code'> : ";
+          final = final + urlArray[i] + "</span>";
+        }
+      }
+      else {
+        final = final + "<span class='breadcrumbDivider font-code'> : </span>";
+        final = final + "<a href='javascript:void(0)' onclick='navigateSection(\"" + section + "\")' class='breadcrumbElement font-code' style='color:" + color + ";'>" + urlArray[i] + "</a>";
+      }
+    }
+  }
+  return final;
+}
+
+// Opens the side nav, and navigates to a section within it.
+function navigateSection(targetSection) {
+  manipNav();
+  navClick(targetSection);
+}
+
+// Opens the side nav, and navigates to a nav element within the file structure.
+function navigateSidenav(targetFolder, targetSection) {
+  manipNav();
+  navClick(targetSection);
+  openNavObject(targetFolder);
+}
+
+// Open/close the side nav based on its current state.
 function manipNav() {
   if (navIsOpen) {
     closeNav();
@@ -168,6 +274,7 @@ function manipNav() {
   }
 }
 
+// Onclick handler for the dark div that covers the content area.
 function outsideClick() {
   if (navIsOpen) {
     closeNav();
@@ -175,119 +282,130 @@ function outsideClick() {
   }
 }
 
+// Open the nav.
 function openNav() {
-  var navContainer = document.getElementById('navContainer');
-  var dimDiv = document.getElementById('dimDiv');
-  var menuBarLabel = document.getElementById('menuBarLabel');
-  var menuBarContainer = document.getElementById('menuBarContainer');
 
-  if (isMobile()) {
-    console.log('mobileNavOpen');
-    navContainer.style.left = "0";
-    navContainer.style.minWidth = "100%";
-    navContainer.style.height = "100vh";
-    navContainer.style.bottom = "0";
-    menuBarContainer.style.borderRight = "none";
-    menuBarContainer.style.borderBottom = "1px solid rgba(255,255,255,0.3)";
-  }
-  else {
-    navContainer.style.left = "0";
-    navContainer.style.minWidth = "700px";
-    dimDiv.style.opacity = "0.5";
-    menuBarContainer.style.borderRight = "1px solid rgba(255,255,255,0.3)";
-  }
+  // Desktop: move nav container into view from the left.
+  $('.navContainer').css('left', '0');
+
+  // Bring the main body dimming into view.
+  $('.dimDiv').css('display', 'block');
+  setTimeout(function() { 
+    $('.dimDiv').css('opacity', '0.5');
+  }, 5);
+  
+  // Fade the right border of the leftside navbar.
+  $('.menuBarContainer').css('border-right', '1px solid rgba(255,255,255,0.3)');
+  $('.navElement').removeClass('navSlideToLeft');
 
   $('.menuBarArrowRight').addClass('fullRotation');
   $('.menuBarArrowLeft').addClass('fullOppositeRotation');
 
-  setTimeout( function() { $('.navTerminalChild').removeClass('hidden'); }, 300);
+  setTimeout( function() { 
+    $('.navTerminalChild').removeClass('hidden'); 
+  }, 300);
+
+  $('.navContainerMobile').css('bottom', '0');
+  $('.navContainerMobile').css('padding-top', '70px');
+
 }
 
+// Closes the side nav.
 function closeNav() {
-  var navContainer = document.getElementById('navContainer');
-  var dimDiv = document.getElementById('dimDiv');
-  var menuBarLabel = document.getElementById('menuBarLabel');
-  var menuBarContainer = document.getElementById('menuBarContainer');
-
   $('.navTerminalChild').addClass('hidden');
 
-  if (isMobile()) {
-    console.log('mobileNavClose');
-    navContainer.style.left = "0";
-    navContainer.style.minWidth = "100%";
-    navContainer.style.height = "0px";
-    navContainer.style.bottom = "100%";
-    menuBarContainer.style.borderRight = "none";
-    menuBarContainer.style.borderBottom = "1px solid white";
-  }
-  else {
-    navContainer.style.left = "-700px";
-    navContainer.style.minWidth = "650px";
-    menuBarContainer.style.borderRight = "1px solid white";
-  }
+  $('.navContainer').css('left', '-750px');
+  $('.menuBarContainer').css('border-right', '1px solid white');
+  $('.dimDiv').css('opacity', '0');
+  $('.navElement').addClass('navSlideToLeft');
+  setTimeout(function() { 
+    $('.dimDiv').css('display', 'none');
+    $('.navElement').remove();
+  }, 300);
   
-  dimDiv.style.opacity = "0";
-
   $('.menuBarArrowRight').removeClass('fullRotation');
   $('.menuBarArrowLeft').removeClass('fullOppositeRotation');
+
+  $('.navContainerMobile').css('bottom', '150%');
+  $('.navContainerMobile').css('padding-top', '0');
 }
 
+// Handles the click of a navigation section within the side nav.
 function navClick(target) {
-  var targetIcon = document.getElementById('nav_' + target);
-  var sectionTitle = document.getElementById('nav_sectionTitle');
-  var sectionDescription = document.getElementById('nav_sectionDescription');
+  $('.nav_sectionTitle').html(target);
+  $('.nav_sectionDescription').html(navSections[target]['description']);
 
-  sectionTitle.innerHTML = target;
-  sectionDescription.innerHTML = navSections[target]['description'];
-
-  // Update navigation structure
-
-  var navScrollable = document.getElementById('navScrollable');
-  var navTerminal = document.getElementById('navTerminal');
   if (target == 'terminal') {
-    navScrollable.style.height = '0px';
-    navTerminal.style.flexGrow = '1';
-    navScrollable.style.flexGrow = '0';
-    navScrollable.style.marginTop = '0px';
-  }
-  else {
-    navScrollable.style.flexGrow = '1';
-    navTerminal.style.flexGrow = '0';
-    navTerminal.style.height = '150px';
-    navScrollable.style.marginTop = '30px';
-    navScrollable.innerHTML = generatedNav[target];
+    $('.navScrollable').css('height', '0px');
+    $('.navTerminal').css('flex-grow', '1');
+    $('.navScrollable').css('flex-grow', '0');
+    $('.navScrollable').css('margin-top', '0px');
+    $('.navTerminal').addClass('displayMe');
+  } else {
+    $('.navScrollable').css('flex-grow', '1');
+    $('.navTerminal').css('flex-grow', '0');
+    $('.navTerminal').css('height', '150px');
+    $('.navScrollable').css('margin-top', '30px');
+    $('.navScrollable').html(generatedNavButtons[target]);
+    setTimeout( function() { 
+      $('.navTerminal').removeClass('displayMe'); 
+    }, 200);
   }
 
   $('.nav_color_bg').css('background-color', navSections[target]['color']);
+  $('.nav_color_bg_home').attr('class', 'navTitleSection nav_color_bg_home nav-color_' + target);
   $('.nav_color').css('color', navSections[target]['color']);
+  activeSection = target;
 
   $('.navTabImage').removeClass('navHoveredImage');
   $('#nav_' + target).children().addClass('navHoveredImage');
 }
 
+// Overhead function for generating the entire contents of the nav.
+function generateNav() {
+  generatedNavButtons['hub'] = findNavItems('hub');
+  generatedNavButtons['chronicle'] = findNavItems('chronicle');
+  generatedNavButtons['codex'] = findNavItems('codex');
+  generatedNavButtons['terminal'] = findNavItems('terminal');
+  generatedNavButtons['about'] = findNavItems('about');
+}
 
+// Triggers all of the overheads for nav generation.
 function findNavItems(target) {
   var currentHeadingObject = '';
   if (target == 'codex') {
-    currentHeadingObject += compileNavObject('geography');
-    currentHeadingObject += compileNavObject('technology');
+    compileObjectOverhead('geography');
+    compileObjectOverhead('technology');
+    currentHeadingObject += generatedNavButtons['geography'];
+    currentHeadingObject += generatedNavButtons['technology'];
   }
   return currentHeadingObject;
 }
 
-// Recursively generates HTML for the innerHTML of the nav sections in a sidebar;
-// based on the items in the headings objects;
-// currentLeft is passed to add additional margin on the left of the nav object to show it is 'below' its parent. This is incremented for each child.
-function compileNavObject(currentHeading, currentLeft = 0) {
+// Overhead function; takes care of all HTML generation for an inputted nav object.
+function compileObjectOverhead(currentHeading) {
+  // Begin by compiling the button for the object.
+  compileNavObjectButton(currentHeading);
 
-  var calcLeft = currentLeft * 20;
+  // Cycle through object children (if any), and run this function on them.
+  for (var i = 0; i < headings[currentHeading]['subheadings'].length; i++) {
+    compileObjectOverhead(headings[currentHeading]['subheadings'][i]);
+  }
 
-  console.log(headings[currentHeading]['actions'])
+  // Proceed to compile the slideout for the object if it has children. - NEEDS CHILDREN BUTTONS
+  if (headings[currentHeading]['actions'] == 'expand') {
+    compileNavObjectSlideout(currentHeading);
+  }
+  // The object is now created.  
+}
+
+// Compiles a button for the input object.
+function compileNavObjectButton(currentHeading) {
   if (headings[currentHeading]['actions'] == 'expand') {
 
     var currentHeadingObject = '';
 
-    currentHeadingObject += "<div class='navHeadingItem' id='" + currentHeading + "' onclick=\"expandNavObject('" + currentHeading + "')\" style='margin-left: " + calcLeft + "px'>";
+    currentHeadingObject += "<div class='navHeadingItem' id='" + headings[currentHeading]['title'] + "' onclick=\"openNavObject('" + currentHeading + "')\" >";
 
     currentHeadingObject += "<div style='display: flex;'>";
 
@@ -299,10 +417,10 @@ function compileNavObject(currentHeading, currentLeft = 0) {
     currentHeadingObject += headings[currentHeading]['title'];
     currentHeadingObject += "</div>";
 
-    currentHeadingObject += "<div class='navHeadingItemDescription'>";
-    currentHeadingObject += headings[currentHeading]['description'];
     currentHeadingObject += "</div>";
 
+    currentHeadingObject += "<div class='navHeadingItemDescription'>";
+    currentHeadingObject += headings[currentHeading]['description'];
     currentHeadingObject += "</div>";
 
     currentHeadingObject += "<div class='navHeadingItemDown nav_color' id=\"navHeadingItemDown_" + currentHeading + "\">";
@@ -311,25 +429,12 @@ function compileNavObject(currentHeading, currentLeft = 0) {
 
     currentHeadingObject += "</div>";
 
-    if (headings[currentHeading]['details']) {
-      currentHeadingObject += "<div class='navHeadingDetails' id='details_" + currentHeading + "' onclick=\"expandNavObject('" + currentHeading + "')\" style='margin-left: " + calcLeft + "px; height: 0px; display:none;'>";
-      currentHeadingObject += headings[currentHeading]['details'];
-      currentHeadingObject += "</div>";
-    }
-
-    var compiledSubheadings = "<div class='navHeadingContainer' id='expand_" + currentHeading + "' style='height: 0px;'>";
-    for (var i = 0; i < headings[currentHeading]['subheadings'].length; i++) {
-      compiledSubheadings += compileNavObject(headings[currentHeading]['subheadings'][i], (currentLeft + 1));
-    }
-    compiledSubheadings += "</div>";
-
-    return currentHeadingObject + compiledSubheadings;
-
+    generatedNavButtons[currentHeading] = currentHeadingObject;
   }
   else if (headings[currentHeading]['actions'] == 'direct') {
     var currentHeadingObject = '';
 
-    currentHeadingObject += "<div class='navHeadingItem' id='nav_" + currentHeading + "' onclick=\"openNavObject('" + currentHeading + "')\" style='margin-left: " + calcLeft + "px'>";
+    currentHeadingObject += "<a class='divLink' href='" + headings[currentHeading]['link'] + "'><div class='navHeadingItem' id='nav_" + currentHeading + "' >";
 
     currentHeadingObject += "<div style='display: flex;'>";
 
@@ -341,61 +446,76 @@ function compileNavObject(currentHeading, currentLeft = 0) {
     currentHeadingObject += headings[currentHeading]['title'];
     currentHeadingObject += "</div>";
 
-    currentHeadingObject += "<div class='navHeadingItemDescription'>";
-    currentHeadingObject += headings[currentHeading]['description'];
     currentHeadingObject += "</div>";
 
+    currentHeadingObject += "<div class='navHeadingItemDescription'>";
+    currentHeadingObject += headings[currentHeading]['description'];
     currentHeadingObject += "</div>";
 
     currentHeadingObject += "<div class='navHeadingItemDown nav_color'>";
     currentHeadingObject += "⤷";
     currentHeadingObject += "</div>";
 
-    currentHeadingObject += "</div>";
+    currentHeadingObject += "</div></a>";
 
-    return currentHeadingObject;
+    generatedNavButtons[currentHeading] = currentHeadingObject;
   }
-
 }
 
-// Expands an expandable nav item in the sidebar when the nav item is clicked, and closes it if already open.
-function expandNavObject(currentHeading) {
-  var child = document.getElementById('expand_' + currentHeading);
-  var child_details = document.getElementById('details_' + currentHeading);
-  if (document.getElementById('details_' + currentHeading)) {
-    child_details = document.getElementById('details_' + currentHeading);
+function compileNavObjectSlideout(currentHeading) {
+
+  var buttonsInThisNav = '';
+  for (var i = 0; i < headings[currentHeading]['subheadings'].length; i++) {
+    buttonsInThisNav += generatedNavButtons[headings[currentHeading]['subheadings'][i]];
   }
 
-  if (child.style.height == '0px') {
-    child.style.height = "auto";
-    if (child_details) {
-      child_details.style.height = "auto";
-      child_details.style.display = "block";
-    }
-    $('#navHeadingItemDown_' + currentHeading).html('-');
+  generatedNavPages[currentHeading] = "<div class='navElement' id='child_"+ currentHeading + "'>\
+      <div class='navBackButton' onclick='closeNavObject(\""+ currentHeading + "\")'>\
+        <p class='font-code nav_color'><< BACK</p>\
+      </div>\
+      <h1 class='navTitle allCaps'>"+ headings[currentHeading]['title'] + "</h1>\
+      <p class='navHeadingDetails'>" + headings[currentHeading]['details'] + "</p>\
+      <div class='navChild navScrollable utsScrollBar'>\
+        " + buttonsInThisNav + "\
+      </div>\
+    </div>";
+}
+
+function openNavObject(currentHeading) {
+  var navObject = generatedNavPages[currentHeading];
+  if (!$("#child_" + currentHeading).length) {
+    $('.siteContainer').append( navObject );
+    
+    setTimeout( function() {
+      $('#child_' + currentHeading).css('left', '0');
+      $('.nav_color').css('color', navSections[activeSection]['color']);
+     }, 5);
+    
   }
-  else {
-    child.style.height = '0px';
-    if (child_details) {
-      child_details.style.height = "0px";
-      child_details.style.display = "none";
-    }
-    $('#navHeadingItemDown_' + currentHeading).html('+');
+}
+
+function closeNavObject(currentHeading) {
+  if ($("#child_" + currentHeading).length) {
+    $('#child_' + currentHeading).css('left', '-750px');
+
+    setTimeout( function() { 
+      $("#child_" + currentHeading).remove(); 
+    }, 300);
   }
 }
 
 // Navigates to the selected page.
-function openNavObject(currentHeading) {
+function navigateNavObject(currentHeading) {
   console.log('navigating to', headings[currentHeading]['link']);
+  window.location.href = headings[currentHeading]['link'];
 }
 
 // Resets the animation of the spinning dorito upon mouseleave of the nav bar.
 function resetSpin() {
-  var logo = document.getElementById('menuBarLogo');
-  logo.style.animation = 'none';
+  $('.menuBarLogo').css('animation', 'none');
   setTimeout(function() {
-    logo.style.animation = '';
-    logo.style.backgroundImage = 'url(../images/spinning_logo/d13.png)';
+    $('.menuBarLogo').css('animation', '');
+    $('.menuBarLogo').css('background-image', 'url(/assets/images/spinning_logo/d13.png)');
   }, 10);
 }
 
