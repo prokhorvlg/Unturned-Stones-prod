@@ -214,8 +214,8 @@ function loadMenuBarLogo() {
 
 // Scrolls to target element within the body container.
 function scrollToElement(targetEl) {
-  $('#contentContainer').animate({ 
-    scrollTop: $('#' + targetEl).offset().top - $('#contentContainer').offset().top + $('#contentContainer').scrollTop()
+  $('body').animate({ 
+    scrollTop: $('#' + targetEl).offset().top - $('body').offset().top + $('body').scrollTop()
   });
 }
 
@@ -263,6 +263,7 @@ function manipNav() {
   if (navIsOpen) {
     closeNav();
     navIsOpen = false;
+    $('body').removeClass('modal-open');
   }
   else {
     openNav();
@@ -271,15 +272,13 @@ function manipNav() {
       openedBefore = true;
     }
     navIsOpen = true;
+    $('body').addClass('modal-open');
   }
 }
 
 // Onclick handler for the dark div that covers the content area.
 function outsideClick() {
-  if (navIsOpen) {
-    closeNav();
-    navIsOpen = false;
-  }
+  manipNav();
 }
 
 // Open the nav.
@@ -342,6 +341,7 @@ function navClick(target) {
     $('.navScrollable').css('margin-top', '0px');
     $('.navTerminal').addClass('displayMe');
   } else {
+    $('.navScrollable').css('height', 'auto');
     $('.navScrollable').css('flex-grow', '1');
     $('.navTerminal').css('flex-grow', '0');
     $('.navTerminal').css('height', '150px');
@@ -358,7 +358,7 @@ function navClick(target) {
   activeSection = target;
 
   $('.navTabImage').removeClass('navHoveredImage');
-  $('#nav_' + target).children().addClass('navHoveredImage');
+  $('.nav_' + target).children().addClass('navHoveredImage');
 }
 
 // Overhead function for generating the entire contents of the nav.
@@ -484,7 +484,7 @@ function compileNavObjectSlideout(currentHeading) {
 function openNavObject(currentHeading) {
   var navObject = generatedNavPages[currentHeading];
   if (!$("#child_" + currentHeading).length) {
-    $('body').append( navObject );
+    $('.appendNavElements').append( navObject );
     
     setTimeout( function() {
       $('#child_' + currentHeading).css('left', '0');
