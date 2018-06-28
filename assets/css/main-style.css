@@ -43,7 +43,7 @@ body {
 }
 
 .menuBarContainer {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -256,7 +256,7 @@ body {
   padding-left: 90px;
   padding-right: 30px;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 100%;
@@ -288,7 +288,7 @@ body {
   padding-top: 0;
   padding-bottom: 30px;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 150%;
   right: 0;
@@ -321,6 +321,14 @@ body {
   letter-spacing: 0.1em;
   padding-left: 20px;
 }
+@media (max-width: 991px) {
+  .navTitle {
+    font-size: 1.5em;
+  }
+  .navDesc {
+    font-size: 9px;
+  }
+}
 .allCaps {
   text-transform: uppercase;
 }
@@ -335,6 +343,12 @@ body {
   margin-left: 20px;
   margin-right: 20px;
 }
+@media (max-width: 991px) {
+  .navTitleSection {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
 .navTabs {
   display: flex;
   align-items: center;
@@ -342,6 +356,12 @@ body {
   padding-top: 0px;
   height: 80px;
 }
+@media (max-width: 991px) {
+  .navTabs {
+    height: auto;
+  }
+}
+    
 .navTab {
   /* width: 40px;
   height: 40px; */
@@ -366,6 +386,11 @@ body {
   transition: 0.2s ease-in-out;
   filter: grayscale(100%) contrast(0%);
 }
+@media (max-width: 991px) {
+  .navTabCircle img {
+    height: 40px;
+  }
+}
 .navTabCircle:hover img {
   opacity: 1;
   filter: grayscale(0%);
@@ -384,6 +409,12 @@ body {
   align-items: center;
   padding-bottom: 20px;
   padding-top: 30px;
+}
+@media (max-width: 991px) {
+  .navSectionBarContainer {
+    padding-bottom: 10px;
+    padding-top: 20px;
+  }
 }
 .navSectionBarLine {
   flex-grow: 1;
@@ -535,7 +566,7 @@ body {
   padding: 10px;
   padding-left: 80px;
   padding-right: 30px;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: -750px;
@@ -643,12 +674,12 @@ body {
 }
 
 .contentContainer {
-  height: 100vh;
+  height: auto;
   width: 100vw;
   padding-left: 60px;
   background: #222;
   color: white;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 @media (max-width: 991px) {
   .contentContainer {
@@ -1517,7 +1548,7 @@ h1, h2, h3, h4, h5, h6 {
 body {
   font-family: 'Cabin', Arial, sans-serif;
   color: rgba(255,255,255,1);
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 p {

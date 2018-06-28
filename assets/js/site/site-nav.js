@@ -484,7 +484,7 @@ function compileNavObjectSlideout(currentHeading) {
 function openNavObject(currentHeading) {
   var navObject = generatedNavPages[currentHeading];
   if (!$("#child_" + currentHeading).length) {
-    $('.siteContainer').append( navObject );
+    $('body').append( navObject );
     
     setTimeout( function() {
       $('#child_' + currentHeading).css('left', '0');
@@ -522,7 +522,7 @@ function resetSpin() {
 // Checks if device is mobile.
 // returns bool
 function isMobile(){
-  if ($(window).width() <= 640) {
+  if ($(window).width() <= 991) {
     return true;
   }
   else {
