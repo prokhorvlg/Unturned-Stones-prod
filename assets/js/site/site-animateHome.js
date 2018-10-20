@@ -1,56 +1,62 @@
 $(document).ready( function() {
 
-  // SPINBANNER ANIMATIONS (giant spinning elements at top of home page)
-  // Clockwise spinner
-  TweenMax.to('.spinRightBig', 200, {rotation:"360", ease:Linear.easeNone, repeat:-1, transformOrigin:'50% 50%'}, {timeScale:0}
-  );
-  // Counterclockwise spinner
-  TweenMax.to('.spinLeftBig', 200, {rotation:"-360", ease:Linear.easeNone, repeat:-1, transformOrigin:'50% 50%'}, {timeScale:0}
-  );
-
-  // SPINTEXT ANIMATIONS (randomized quotes appearing around square inside banner at top of home page)
-  // Activate random text
-  var $spinText = $('.spinText');
-  $spinText.each(function() {
-    randomizeEcho(this, window.phrases);
-  });
-
   // SPINFLOAT ANIMATIONS (square selectors appearing inside banner at top of home page)
   // Activate random timing, sizing, location
   spinFloatRandomAnim('spin-float-1');
   spinFloatRandomAnim('spin-float-2');
 
-  // STREAKER ANIMATIONS (small spaceships moving horizontally across screen in body)
-  // Activate streaker image-swap animations
-  window.streakers = [];
-  window.streakersClasses = [];
+  if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    // Mobile code
+  } else {
+    // Desktop code
 
-  function streakerSwap() {
-    for (var i = 0; i < window.streakers.length; i++) {
-      if (window.streakers[i].classList.contains(window.streakersClasses[i][0])) {
-        window.streakers[i].classList.remove(window.streakersClasses[i][0]);
-        window.streakers[i].classList.add(window.streakersClasses[i][1]);
-      } else {
-        window.streakers[i].classList.remove(window.streakersClasses[i][1]);
-        window.streakers[i].classList.add(window.streakersClasses[i][0]);
-      }
-    }
-    setTimeout(function() {
-      window.requestAnimationFrame(streakerSwap);
-    }, 500);
-  }
+    // SPINBANNER ANIMATIONS (giant spinning elements at top of home page)
+    // Clockwise spinner
+    TweenMax.to('.spinRightBig', 200, {rotation:"360", ease:Linear.easeNone, repeat:-1, transformOrigin:'50% 50%'}, {timeScale:0}
+    );
+    // Counterclockwise spinner
+    TweenMax.to('.spinLeftBig', 200, {rotation:"-360", ease:Linear.easeNone, repeat:-1, transformOrigin:'50% 50%'}, {timeScale:0}
+    );
 
-  for (var i = 0; i < 7; i++) {
-    $('.streaker_sp' + i + ' .hcdStreakerImage').each(function() {
-      window.streakers.push(this);
-      window.streakersClasses.push([$(this).data('first-streaker'),$(this).data('second-streaker')]);
+    // SPINTEXT ANIMATIONS (randomized quotes appearing around square inside banner at top of home page)
+    // Activate random text
+    var $spinText = $('.spinText');
+    $spinText.each(function() {
+      randomizeEcho(this, window.phrases);
     });
-  }
-  window.requestAnimationFrame(streakerSwap);
 
-  // Activate streaker randomized movement animations
-  streakerRandomAnim('streaker-left-to-right', 'streaker_sp');
-  streakerRandomAnim('streaker-right-to-left', 'streaker_spr');
+    // STREAKER ANIMATIONS (small spaceships moving horizontally across screen in body)
+    // Activate streaker image-swap animations
+    window.streakers = [];
+    window.streakersClasses = [];
+
+    function streakerSwap() {
+      for (var i = 0; i < window.streakers.length; i++) {
+        if (window.streakers[i].classList.contains(window.streakersClasses[i][0])) {
+          window.streakers[i].classList.remove(window.streakersClasses[i][0]);
+          window.streakers[i].classList.add(window.streakersClasses[i][1]);
+        } else {
+          window.streakers[i].classList.remove(window.streakersClasses[i][1]);
+          window.streakers[i].classList.add(window.streakersClasses[i][0]);
+        }
+      }
+      setTimeout(function() {
+        window.requestAnimationFrame(streakerSwap);
+      }, 500);
+    }
+
+    for (var i = 0; i < 7; i++) {
+      $('.streaker_sp' + i + ' .hcdStreakerImage').each(function() {
+        window.streakers.push(this);
+        window.streakersClasses.push([$(this).data('first-streaker'),$(this).data('second-streaker')]);
+      });
+    }
+    window.requestAnimationFrame(streakerSwap);
+
+    // Activate streaker randomized movement animations
+    streakerRandomAnim('streaker-left-to-right', 'streaker_sp');
+    streakerRandomAnim('streaker-right-to-left', 'streaker_spr');
+  }
 
   // CODELINEPARA ANIMATIONS (animated codelines at the top of each home page 'dialog')
   // Activate randomized code generation
@@ -84,26 +90,6 @@ $(document).ready( function() {
   cycleThroughImageBackgrounds($('.hcd-attrition-codelines'), ["hcd-attrition-codelines-1", "hcd-attrition-codelines-2", "hcd-attrition-codelines-3"], 200);
   //cycleThroughSpinner($('.hcd-pravo-icons-container'), ["hcd-pravo-1", "hcd-pravo-2", "hcd-pravo-3", "hcd-pravo-4"], 5000, 100);
   cycleThroughSpinnerColor($('.hcd-pravo-icons-container'), "hcd-pravo-icon-selected", 2000);
-
-  // Initiate scroll listeners to trigger animations at certain scroll points
-  /*
-  $(window).scroll(function() {
-    var $scrollCheck = $('.scrollCheck');
-    $scrollCheck.each( function() {
-      if ( checkInView(document.getElementById('body'), this, 1000) ){
-
-        if ($(this).hasClass('homeContentFade')) {
-          this.style.opacity = '1';
-        }
-        else if ($(this).hasClass('fadeInCodeParas')) {
-          recursiveCodeIn($(this).children('p').first());
-        }
-
-      }
-    });
-  });
-  $(window).scroll();
-  */
 
   // Handles click of little close button on the top right of home page 'dialogs'.
   $('.hcdIcon_interactive').click(function() {
